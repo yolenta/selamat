@@ -1,103 +1,90 @@
+import { Heart, Sparkles } from "lucide-react";
+import ShareBar from "@/components/ShareBar";
+import Confetti from "@/components/Confetti";
 import Image from "next/image";
 
-export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+const THEMES = {
+rose: {
+wrapper: "from-rose-50 to-pink-50",
+border: "border-rose-200",
+accent: "text-rose-600",
+glow: "shadow-glow",
+},
+violet: {
+wrapper: "from-violet-50 to-pink-50",
+border: "border-violet-200",
+accent: "text-violet-600",
+glow: "shadow-glow",
+},
+sky: {
+wrapper: "from-sky-50 to-cyan-50",
+border: "border-sky-200",
+accent: "text-sky-600",
+glow: "shadow-glow",
+},
+} as const;
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+
+type PageProps = {
+searchParams?: Record<string, string | string[] | undefined>;
+};
+
+
+export default function Page({ searchParams = {} }: PageProps) {
+const to = decodeURIComponent((searchParams.to as string) ?? "Sayang");
+const from = decodeURIComponent((searchParams.from as string) ?? "Aku");
+const msg = decodeURIComponent(
+(searchParams.msg as string) ?? "Selamat ulang tahun! Sehat, bahagia, dan makin disayang."
+);
+const themeKey = ((searchParams.theme as string) ?? "rose") as keyof typeof THEMES;
+const theme = THEMES[themeKey] ?? THEMES.rose;
+
+
+return (
+<main className={`min-h-screen w-full bg-gradient-to-br ${theme.wrapper} flex items-center justify-center py-10 px-4`}>
+{/* konfeti sekali saat load */}
+<Confetti />
+
+
+<div className={`relative max-w-xl w-full bg-white/80 backdrop-blur-md card-shadow rounded-3xl border ${theme.border} p-8`}>
+<div className="absolute -top-8 left-1/2 -translate-x-1/2">
+<div className="h-16 w-16 rounded-full bg-white/90 border border-pink-100 flex items-center justify-center">
+<Heart className={`h-8 w-8 ${theme.accent}`} />
+</div>
+</div>
+
+
+<div className="text-center mt-6">
+<p className="font-sans uppercase tracking-widest text-xs text-slate-500">Untuk</p>
+<h1 className="font-display text-4xl md:text-5xl mt-1">{to}</h1>
+</div>
+
+
+<p className="mt-6 text-lg leading-relaxed text-slate-700 text-center">
+{msg}
+</p>
+
+
+<div className="mt-6 flex items-center justify-center gap-2 text-sm text-slate-500">
+<Sparkles className={"h-4 w-4"} />
+<span>Dikirim dengan cinta dari</span>
+<span className={`font-medium ${theme.accent}`}>{from}</span>
+</div>
+
+
+<div className="mt-8 flex flex-col items-center gap-4">
+<ShareBar to={to} from={from} msg={msg} />
+<div className="text-xs text-slate-400">
+Tip: Ubah parameter URL <code>?to=...&from=...&msg=...&theme=rose|violet|sky</code>
+</div>
+</div>
+
+
+<div className="mt-8 flex justify-center">
+<Image src="/love.svg" alt="love" width={120} height={120} priority />
+{/* <Image src="/love.svg" alt="love" width={120} height={120} priority /> */}
+</div>
+</div>
+</main>
+);
 }
