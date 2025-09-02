@@ -9,14 +9,14 @@ const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfa
 
 
 export const metadata: Metadata = {
-title: "Kartu Ucapan Ulang Tahun",
-description: "Kartu ucapan ulang tahun cantik, mudah dibagikan.",
+title: "Selamat Ulang Tahun Cosmas Putra Kristanto",
+description: "Happy Birthday Sayang! Semoga sehat, bahagia, dan semua harapan kamu tercapai.",
 openGraph: {
-title: "Kartu Ucapan Ulang Tahun",
-description: "Kartu ucapan ulang tahun cantik, mudah dibagikan.",
+title: "Selamat Ulang Tahun Cosmas Putra Kristanto",
+description: "Happy Birthday Sayang! Semoga sehat, bahagia, dan semua harapan kamu tercapai.",
 images: [
 {
-url: "/api/og?to=Kekasih&msg=Selamat%20ulang%20tahun%20sayang!",
+url: "/bersama.jpg",
 width: 1200,
 height: 630,
 },
