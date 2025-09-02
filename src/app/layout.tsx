@@ -28,9 +28,9 @@ icons: [{ rel: "icon", url: "/favicon.svg" }],
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 return (
-<html lang="id" className="h-full">
-{/* remove font-sans utility and let globals.css control the font via --font-inter */}
-<body className={cn("min-h-screen antialiased", inter.variable, playfair.variable)}>
+<html lang="id" className="h-full scroll-smooth">
+{/* scroll-snap di body untuk efek snap per section */}
+<body className={cn("min-h-screen antialiased snap-y snap-mandatory", inter.variable, playfair.variable)}>
 {children}
 </body>
 </html>
