@@ -34,7 +34,7 @@ export default function Page({ searchParams }: { searchParams?: SP }) {
   const galleryStr = Array.isArray(galleryRaw) ? galleryRaw.join(",") : (galleryRaw ?? "");
   const gallery = galleryStr
     ? galleryStr.split(",").map((x) => decodeURIComponent(x.trim())).filter(Boolean)
-    : ["/gallery/1.jpg", "/gallery/2.jpg", "/gallery/3.jpg", "/gallery/4.jpg", "/gallery/5.jpg", "/gallery/6.jpg", "/gallery/7.jpeg", "/gallery/8.jpg", "/gallery/9.jpg", "/gallery/10.jpg"];
+    : ["/gallery/1.jpg", "/gallery/2.jpg", "/gallery/3.jpg", "/gallery/4.jpg", "/gallery/5.jpg", "/gallery/6.JPG", "/gallery/7.jpeg", "/gallery/8.jpg", "/gallery/9.jpg", "/gallery/10.jpg"];
 
 
 type SP = Record<string, string | string[] | undefined>;
